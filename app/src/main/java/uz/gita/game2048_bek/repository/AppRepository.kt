@@ -16,6 +16,13 @@ class AppRepository private constructor() {
 
     private val NEW_ELEMENT = 2
     private var score = 0
+    private var emptyList = ArrayList<Pair<Int, Int>>()
+
+    private var listener: (() -> Unit)? = null
+
+    fun setListener(listener: () -> Unit) {
+        this.listener = listener
+    }
 
     val matrix = arrayOf(
         arrayOf(0, 0, 0, 0),
@@ -31,8 +38,19 @@ class AppRepository private constructor() {
 
     fun getScore(): Int = score
 
+    fun resetGame() {
+        emptyList.clear()
+        for (i in matrix.indices) {
+            for (j in matrix[i].indices) {
+                matrix[i][j] = 0
+            }
+        }
+        addNewElement()
+        addNewElement()
+    }
+
     private fun addNewElement() {
-        val emptyList = ArrayList<Pair<Int, Int>>()
+        emptyList = ArrayList()
         for (i in matrix.indices) {
             for (j in matrix[i].indices) {
                 if (matrix[i][j] == 0) emptyList.add(Pair(i, j))
@@ -40,7 +58,7 @@ class AppRepository private constructor() {
         }
 
         if (emptyList.isEmpty()) {
-
+            listener?.invoke()
         } else {
             val randomPos = Random.nextInt(0, emptyList.size)
             matrix[emptyList[randomPos].first][emptyList[randomPos].second] = NEW_ELEMENT

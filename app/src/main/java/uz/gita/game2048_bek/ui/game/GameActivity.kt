@@ -1,7 +1,9 @@
 package uz.gita.game2048_bek.ui.game
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
@@ -9,6 +11,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import uz.gita.game2048_bek.R
 import uz.gita.game2048_bek.model.SideEnum
 import uz.gita.game2048_bek.repository.AppRepository
+import uz.gita.game2048_bek.ui.result.ResultActivity
 import uz.gita.game2048_bek.utils.BackgroundUtil
 import uz.gita.game2048_bek.utils.MyTouchListener
 
@@ -16,6 +19,7 @@ class GameActivity : AppCompatActivity() {
     private val items: MutableList<TextView> = ArrayList(16)
     private lateinit var mainView: LinearLayoutCompat
     private lateinit var score: AppCompatTextView
+    private lateinit var reset: ImageView
     private val repository = AppRepository.getInstance()
     private val util = BackgroundUtil()
 
@@ -27,6 +31,10 @@ class GameActivity : AppCompatActivity() {
         mainView = findViewById(R.id.mainView)
         loadViews()
         describeMatrixToViews()
+
+        repository.setListener {
+            openResultActivity()
+        }
 
         val myTouchListener = MyTouchListener(this)
 
@@ -52,10 +60,21 @@ class GameActivity : AppCompatActivity() {
         }
 
         mainView.setOnTouchListener(myTouchListener)
+
+        reset.setOnClickListener {
+            repository.resetGame()
+            describeMatrixToViews()
+        }
+    }
+
+    private fun openResultActivity() {
+        startActivity(Intent(this, ResultActivity::class.java))
+        finish()
     }
 
     private fun loadViews() {
         score = findViewById(R.id.txtScore)
+        reset = findViewById(R.id.buttonReload)
 
         for (i in 0 until mainView.childCount) {
             val linear = mainView.getChildAt(i) as LinearLayoutCompat

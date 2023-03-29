@@ -7,8 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bg_frame">#5F4A38</color>
-    <color name="bg_btn_0">#836D5A</color>
+    <color name="dark_gray">#7F6B5A</color>
+    <color name="bg_btn_0">#AB9C8D</color>
     <color name="bg_btn_2">#D008F3</color>
     <color name="bg_btn_1024">#9A2A07</color>
     <color name="bg_btn_128">#7AE300</color>
