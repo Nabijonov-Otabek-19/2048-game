@@ -7,63 +7,89 @@
     android:background="@drawable/bg_exit"
     android:padding="8dp">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txt"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/aclonica"
-        android:gravity="center"
-        android:text="Do you want to finish game ?"
-        android:textColor="@color/dark_gray"
-        android:textSize="20sp"
+        android:layout_height="80dp"
+        android:layout_marginVertical="8dp"
+        android:src="@drawable/ic_score"
+        android:tint="@color/dark_gray"
+        app:layout_constraintBottom_toTopOf="@id/line1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_marginVertical="16dp"
-        android:src="@drawable/ic_finish"
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="8dp"
+        android:background="@color/dark_gray"
+        app:layout_constraintBottom_toTopOf="@id/txtRecord"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt" />
+        app:layout_constraintTop_toBottomOf="@id/img" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtRecord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aclonica"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Record\n300"
+        android:textColor="@color/dark_gray"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/line2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="8dp"
+        android:background="@color/dark_gray"
+        app:layout_constraintBottom_toTopOf="@id/btnClose"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtRecord" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnNo"
+        android:id="@+id/btnClose"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginVertical="16dp"
         android:background="@drawable/bg_button"
         android:backgroundTint="@color/red"
         android:fontFamily="@font/aclonica"
-        android:text="No"
+        android:text="Close"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btnYes"
-        app:layout_constraintTop_toBottomOf="@id/img" />
+        app:layout_constraintRight_toLeftOf="@id/btnReset"
+        app:layout_constraintTop_toBottomOf="@id/line2" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnYes"
+        android:id="@+id/btnReset"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginVertical="16dp"
         android:background="@drawable/bg_button"
         android:backgroundTint="@color/green"
         android:fontFamily="@font/aclonica"
-        android:text="Yes"
+        android:text="Reset"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintLeft_toRightOf="@id/btnNo"
+        app:layout_constraintLeft_toRightOf="@id/btnClose"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img" />
+        app:layout_constraintTop_toBottomOf="@id/line2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
