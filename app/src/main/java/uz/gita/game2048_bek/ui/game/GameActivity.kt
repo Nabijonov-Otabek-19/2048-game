@@ -2,7 +2,6 @@ package uz.gita.game2048_bek.ui.game
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -15,7 +14,6 @@ import uz.gita.game2048_bek.databinding.ActivityGameBinding
 import uz.gita.game2048_bek.db.MyBase
 import uz.gita.game2048_bek.model.SideEnum
 import uz.gita.game2048_bek.repository.AppRepository
-import uz.gita.game2048_bek.ui.result.ResultActivity
 import uz.gita.game2048_bek.utils.BackgroundUtil
 import uz.gita.game2048_bek.utils.MyTouchListener
 
@@ -33,12 +31,19 @@ class GameActivity : AppCompatActivity() {
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        repository.score = 0
+
         binding.apply {
             loadViews()
             describeMatrixToViews()
 
             repository.setListener {
-                openResultActivity()
+                showGameOverDialog()
+                if (repository.score > myBase.record) {
+                    myBase.record = repository.score
+                }
+                repository.resetGame()
+                describeMatrixToViews()
             }
 
             val myTouchListener = MyTouchListener(this@GameActivity)
@@ -72,11 +77,6 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun openResultActivity() {
-        startActivity(Intent(this, ResultActivity::class.java))
-        finish()
-    }
-
     private fun showExitDialog() {
         val dialog = Dialog(this)
         dialog.setCancelable(false)
@@ -89,11 +89,8 @@ class GameActivity : AppCompatActivity() {
         btnNo.setOnClickListener { dialog.dismiss() }
 
         btnYes.setOnClickListener {
-            val str = binding.txtRecord.text.toString()
-            val currRecord = str.substring(6, str.length).trim().toInt()
-            if (currRecord >= myBase.record) {
-                myBase.record = currRecord
-            }
+            repository.resetGame()
+            describeMatrixToViews()
             dialog.dismiss()
             this.finish()
         }
@@ -121,6 +118,27 @@ class GameActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    private fun showGameOverDialog() {
+        val dialog = Dialog(this)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.custom_gameover_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val btnRestart: AppCompatButton = dialog.findViewById(R.id.btnRestart)
+        val btnHome: AppCompatButton = dialog.findViewById(R.id.btnHome)
+
+        btnHome.setOnClickListener {
+            dialog.dismiss()
+            this.finish()
+        }
+
+        btnRestart.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.create()
+        dialog.show()
+    }
+
     override fun onBackPressed() {
         showExitDialog()
     }
@@ -138,7 +156,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun describeMatrixToViews() {
         binding.apply {
-            txtScore.text = "Score\n${repository.getScore()}"
+            txtScore.text = "Score\n${repository.score}"
             txtRecord.text = "Record\n${myBase.record}"
         }
 

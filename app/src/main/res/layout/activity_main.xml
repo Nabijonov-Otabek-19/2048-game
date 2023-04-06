@@ -3,18 +3,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/bg_item_0"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     tools:context=".ui.main.MainActivity">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aclonica"
+        android:gravity="center"
+        android:text="2048"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@id/btnStart"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/bg_main_button"
+        android:elevation="16dp"
+        android:fontFamily="@font/aclonica"
         android:text="Start"
+        android:textColor="@color/dark_gray"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnAbout"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_main_button"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btnRecords" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnRecords"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_main_button"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_record"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btnAbout"
+        app:layout_constraintRight_toLeftOf="@id/btnExit" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnExit"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_main_button"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:padding="12dp"
+        android:src="@drawable/exit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btnRecords"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

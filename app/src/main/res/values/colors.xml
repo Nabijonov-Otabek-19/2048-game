@@ -5,8 +5,10 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="dark_gray">#7F6B5A</color>
     <color name="bg_btn_0">#AB9C8D</color>
     <color name="bg_btn_2">#D008F3</color>
@@ -20,4 +22,8 @@
     <color name="bg_btn_512">#CB33E4</color>
     <color name="bg_btn_64">#F4BE6D</color>
     <color name="bg_btn_8">#FFE500</color>
+    <color name="blue">#152C7D</color>
+    <color name="light_gray">#F4EFDC</color>
+    <color name="red">#F44336</color>
+    <color name="green">#24D12B</color>
 </resources>

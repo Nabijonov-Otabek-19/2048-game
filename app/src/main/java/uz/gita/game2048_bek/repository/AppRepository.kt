@@ -2,7 +2,6 @@ package uz.gita.game2048_bek.repository
 
 import kotlin.random.Random
 
-
 class AppRepository private constructor() {
     companion object {
         private lateinit var instance: AppRepository
@@ -15,7 +14,6 @@ class AppRepository private constructor() {
     }
 
     private val NEW_ELEMENT = 2
-    private var score = 0
     private var emptyList = ArrayList<Pair<Int, Int>>()
 
     private var listener: (() -> Unit)? = null
@@ -36,7 +34,7 @@ class AppRepository private constructor() {
         addNewElement()
     }
 
-    fun getScore(): Int = score
+    var score: Int = 0
 
     fun resetGame() {
         emptyList.clear()
@@ -45,6 +43,7 @@ class AppRepository private constructor() {
                 matrix[i][j] = 0
             }
         }
+        score = 0
         addNewElement()
         addNewElement()
     }
@@ -66,22 +65,6 @@ class AppRepository private constructor() {
     }
 
     fun moveToLeft() {
-        /*
-        0 0 0 0   -> 0 0 0 0
-        2 0 0 0   -> 2 0 0 0
-        2 0 2 0   -> 4 0 0 0
-        2 2 2 0   -> 4 2 0 0
-        0 2 2 4   -> 4 4 0 0
-        0 2 2 4   -> 8 0 0 0   xato
-        2 2 2 2   -> 4 4 0 0
-        2 4 2 2   -> 2 4 4 0
-        * */
-
-        // 0 2 2 2   -> 4 4 0 0
-        // amounts = [] -> [2]
-        // amounts = [2] -> [4]
-        // amounts = [4] -> [4 , 2]
-        // 0 0 0 0  -> 4 2 0 0
         for (i in matrix.indices) {
             val amounts = ArrayList<Int>(4)
             var bool = true
@@ -105,27 +88,10 @@ class AppRepository private constructor() {
                 matrix[i][k] = amounts[k]
             }
         }
-        // bosh joy yoq bolsa oyin tugashi kk
         addNewElement()
     }
 
     fun moveToRight() {
-        /*
-        0 0 0 0   -> 0 0 0 0
-        2 0 0 0   -> 0 0 0 2
-        2 0 2 0   -> 0 0 0 4
-        2 2 2 0   -> 0 0 2 4
-        0 2 2 4   -> 0 0 4 4
-        0 2 2 4   -> 0 0 0 8   xato
-        2 2 2 2   -> 0 0 4 4
-        2 4 2 2   -> 0 2 4 4
-        * */
-
-        // 0 2 2 2   -> 4 4 0 0
-        // amounts = [] -> [2]
-        // amounts = [2] -> [4]
-        // amounts = [4] -> [4 , 2]
-        // 0 0 0 0  -> 4 2 0 0
         for (i in matrix.indices) {
             val amounts = ArrayList<Int>(4)
             var bool = true
@@ -149,22 +115,10 @@ class AppRepository private constructor() {
                 matrix[i][matrix[i].size - k - 1] = amounts[k]
             }
         }
-        // bosh joy yoq bolsa oyin tugashi kk
         addNewElement()
     }
 
     fun moveToUp() {
-        /*
-        0 0 0 0   -> 0 0 0 0
-        2 0 0 0   -> 2 0 0 0
-        2 0 2 0   -> 4 0 0 0
-        2 2 2 0   -> 4 2 0 0
-        0 2 2 4   -> 4 4 0 0
-        0 2 2 4   -> 8 0 0 0   xato
-        2 2 2 2   -> 4 4 0 0
-        2 4 2 2   -> 2 4 4 0
-        * */
-
         for (i in matrix.indices) {
             val amount = ArrayList<Int>()
             var bool = true
@@ -187,7 +141,6 @@ class AppRepository private constructor() {
                 matrix[j][i] = amount[j]
             }
         }
-        // bosh joy yoq bolsa oyin tugashi kk
         addNewElement()
     }
 

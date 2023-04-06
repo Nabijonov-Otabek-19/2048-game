@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">2048 game</string>
+    <string name="about">This app is made by Otabek. If you have any questions or ideas, feel free to let me know.\n\nEnjoy the game.</string>
 </resources>
