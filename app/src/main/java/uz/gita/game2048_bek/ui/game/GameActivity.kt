@@ -2,10 +2,19 @@ package uz.gita.game2048_bek.ui.game
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.ContentValues
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
+import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -16,6 +25,9 @@ import uz.gita.game2048_bek.model.SideEnum
 import uz.gita.game2048_bek.repository.AppRepository
 import uz.gita.game2048_bek.utils.BackgroundUtil
 import uz.gita.game2048_bek.utils.MyTouchListener
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 
 class GameActivity : AppCompatActivity() {
     private val items: MutableList<TextView> = ArrayList(16)
@@ -74,6 +86,49 @@ class GameActivity : AppCompatActivity() {
             btnReload.setOnClickListener {
                 showResetDialog()
             }
+
+
+            btnScreenshot.setOnClickListener {
+                val bitmap = getBitmapFromView(fullFrame)
+                saveMediaToStorage(bitmap)
+            }
+        }
+    }
+
+    // Get bitmap of view
+    private fun getBitmapFromView(view: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(
+            view.width, view.height, Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
+    }
+
+    // Function to save an Image
+    private fun saveMediaToStorage(bitmap: Bitmap) {
+        val filename = "${System.currentTimeMillis()}.jpg"
+        var fos: OutputStream? = null
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            this.contentResolver?.also { resolver ->
+                val contentValues = ContentValues().apply {
+                    put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+                    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                }
+                val imageUri: Uri? =
+                    resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                fos = imageUri?.let { resolver.openOutputStream(it) }
+            }
+        } else {
+            val imagesDir =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val image = File(imagesDir, filename)
+            fos = FileOutputStream(image)
+        }
+        fos?.use {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+            Toast.makeText(this, "Captured View and saved to Gallery", Toast.LENGTH_SHORT).show()
         }
     }
 
