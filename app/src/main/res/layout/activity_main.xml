@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
+    android:background="@color/back"
     tools:context=".ui.main.MainActivity">
 
 
@@ -15,6 +15,7 @@
         android:gravity="center"
         android:text="2048"
         android:textSize="60sp"
+        android:textColor="@color/back_datas"
         app:layout_constraintBottom_toTopOf="@id/btnStart"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -28,7 +29,7 @@
         android:fontFamily="@font/aclonica"
         android:gravity="center"
         android:text="Play"
-        android:textColor="@color/dark_gray"
+        android:textColor="@color/back_datas"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

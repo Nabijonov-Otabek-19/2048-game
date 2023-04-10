@@ -15,9 +15,10 @@
     <color name="dark_gray">#7F6B5A</color>
 
 
-    <color name="back">#FAF8EF</color>
-    <color name="back_frame">#C19854</color>
-    <color name="back_button">#F6F1F1</color>
+    <color name="back">#F7F8FD</color>
+    <color name="back_frame">#CDD1DA</color>
+    <color name="back_button">#E4E8F4</color>
+    <color name="back_datas">#3F51B5</color>
 
 
     <!-- Button Colors -->

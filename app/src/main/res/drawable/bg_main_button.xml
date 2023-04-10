@@ -4,6 +4,6 @@
     <corners android:radius="150dp" />
     <stroke
         android:width="4dp"
-        android:color="@color/dark_gray" />
-    <solid android:color="@color/light_gray" />
+        android:color="@color/back_datas" />
+    <solid android:color="@color/back_button" />
 </shape>
